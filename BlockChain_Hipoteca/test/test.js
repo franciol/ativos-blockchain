@@ -8,7 +8,10 @@ function hex_to_ascii(str1) {
     }
     return str;
 }
-
+Date.prototype.addHours = function (h) {
+    this.setHours(this.getHours() + h);
+    return this;
+}
 const now = Math.floor((new Date()).addHours(4) / 1000);
 
 function convertToHex(str) {
@@ -18,10 +21,7 @@ function convertToHex(str) {
     }
     return hex;
 }
-Date.prototype.addHours = function (h) {
-    this.setHours(this.getHours() + h);
-    return this;
-}
+
 
 contract('hipoteca', function (accounts) {
 
