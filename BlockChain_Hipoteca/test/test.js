@@ -44,7 +44,9 @@ contract('hipoteca', function (accounts) {
                 return instance.verEmprestimo.call();
             }).then(function (res) {
                 console.log("Endereco do contrato: " + hex_to_ascii(res._endereco));
-                console.log("valor do Emprestimo : " + res._valor_emprestimo)
+                console.log("valor do Emprestimo : " + res._valor_emprestimo);
+                console.log("Contrato Pronto\n");
+                console.log(res);
                 assert.equal(res._valor_emprestimo, 1250, "Valor de emprestimo não bate");
 
 
