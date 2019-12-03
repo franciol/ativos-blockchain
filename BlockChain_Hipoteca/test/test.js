@@ -35,12 +35,22 @@ contract('hipoteca', function (accounts) {
     address _devedor,
     address _credor */
     it("Criando Contrato", function () {
-        
+
 
         return hipoteca.deployed().then(function (instance) {
             var endereco1 = "0x" + convertToHex("Rua Quatá, 300");
             var matricula1 = [0x11, 0x02, 0x03, 0x1f];
-            return instance.pegarEmprestimo(endereco1, matricula1, 1250, 1270, 2, now, 20, accounts[1], accounts[0]).then(function () {
+            return instance.pegarEmprestimo(
+                endereco1,  // Endereco
+                matricula1, // Matricula
+                1250,       // Valor
+                1270,       // Valor Ajustado
+                2,          // Juros Mensais
+                now,        // Data de vencimento do Contrato
+                20,         // Juros da multa
+                accounts[1],// Devedor, aplicante ao empréstimo
+                accounts[0] // Credor
+            ).then(function () {
                 return instance.verEmprestimo.call();
             }).then(function (res) {
                 console.log("Endereco do contrato: " + hex_to_ascii(res._endereco));
@@ -76,7 +86,7 @@ contract('hipoteca', function (accounts) {
         }).then(function (res) {
 
             console.log("Data de fim do Contrato: " + (new Date(res._data_vencimento * 1000)));
-            assert.equal((res._data_vencimento * 1000),(now * 1000), "Valor de emprestimo não bate");
+            assert.equal((res._data_vencimento * 1000), (now * 1000), "Valor de emprestimo não bate");
         });
     });
 
